@@ -17,3 +17,31 @@ sudo ./install_virginia.sh<br>
 ------------------------------------------------------------------------------
 
 <b>3-</b> Aguardar 1 minuto para coleta e depois poderá criar o dashboard para visualização.
+
+------------------------------------------------------------------------------
+
+<b>4-</b> Policy de permissão para o ec2 mandar as métricas para cloudwatch.
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:PutMetricData",
+                "cloudwatch:GetMetricStatistics",
+                "cloudwatch:ListMetrics",
+                "ec2:DescribeTags"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetParameter"
+            ],
+            "Resource": "arn:aws:ssm:*:*:parameter/AmazonCloudWatch-*"
+        }
+    ]
+}
